@@ -22,4 +22,4 @@ train[train$Outlet_Type == "Grocery Store" & train$Outlet_Size == NA]
 if(train$Outlet_Type == 'Grocery Store') {train$Outlet_Size = 'small'}
 train$Outlet_Type
 
-
+train$Outlet_Size[train$Outlet_Size[NA] | train$Outlet_Type["Grocery Store"]] = "small"
