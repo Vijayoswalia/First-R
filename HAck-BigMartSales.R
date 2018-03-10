@@ -4,10 +4,10 @@ library(zoo)
 library(dplyr)
 library(randomForest)
 library(rpart)
-train = read.csv("E:\\Data Science\\rWork\\rProjects\\First-R\\Hackathon\\Train_UWu5bXk.csv",stringsAsFactors = F, na.strings = c(""))
-test = read.csv("E:\\Data Science\\rWork\\rProjects\\First-R\\Hackathon\\Test_u94Q5KV.csv",stringsAsFactors = F, na.strings = c(""))
+train = read.csv("E:\\Data Science\\rWork\\rProjects\\First-R\\Hackathon\\Train_UWu5bXk.csv",stringsAsFactors = T, na.strings = c(""))
+test = read.csv("E:\\Data Science\\rWork\\rProjects\\First-R\\Hackathon\\Test_u94Q5KV.csv",stringsAsFactors = T, na.strings = c(""))
 train
-typeof(train)
+class(train)
 head(train)
 
 #Check for missing value
@@ -104,4 +104,8 @@ model1 = lm(Item_Outlet_Sales ~ Item_Weight+Item_Fat_Content+Item_Visibility+Ite
              Outlet_Type, data = train)
 summary(model1)
 #library(rpart)
-rpart(Item_Outlet_Sales ~., data = train, method="anova")
+crt = rpart(Item_Outlet_Sales ~., data = train, method="anova")
+crt
+prp(crt)
+Predictcrt=predict(crt, newdata = test)
+table(test$Item_Outlet_Sales,Predictcrt)
